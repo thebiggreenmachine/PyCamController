@@ -9,9 +9,7 @@ import time
 import subprocess
 
 Tester = sys.argv[1]
-
 SERIAL_PORT = "/dev/serial0"  # Raspberry Pi 4
-
 port ='/dev/ttyACM0'
 GPS = serial.Serial(port)
 GPS.baudrate = 9600
@@ -31,6 +29,7 @@ with open(Tester + '.csv', 'w') as file:
     base_time = start_time
     newtime = time.perf_counter()
     counter = 0
+    
     while(counter < 42):
         print("readingline")
         print("Asking for RSSI")
@@ -39,7 +38,6 @@ with open(Tester + '.csv', 'w') as file:
         CSQLine = ser.readline().decode('utf-8')
         while(CSQLine.find("+CSQ:") == -1):
              CSQLine = ser.readline().decode('utf-8')
-
         reply2 = CSQLine
         temp = CPUTemperature()
         while((newtime - start_time) < 5):
